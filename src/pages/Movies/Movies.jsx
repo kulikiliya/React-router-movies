@@ -1,13 +1,5 @@
-import axios from 'axios';
 import { useRef } from 'react';
-import { useEffect, useState } from 'react';
-import {
-  Link,
-  Outlet,
-  useLocation,
-  // useNavigate,
-  useParams,
-} from 'react-router-dom';
+import { Link, Outlet, useLocation, useParams } from 'react-router-dom';
 import { Suspense } from 'react';
 import {
   WrapperForMain,
@@ -16,38 +8,19 @@ import {
   GenreList,
   AdditionalList,
 } from './movies.styled';
+import { useHTTP } from 'components/hooks/useHTTP';
+import { getMainList } from 'components/service/api';
 
 const Movies = () => {
   const { id } = useParams();
-
-  const [movie, setMovie] = useState({});
-  const [loading, setLoading] = useState(false);
-
-  // const navigate = useNavigate();
   const location = useLocation();
   const backToHrefLink = useRef(location.state?.from || '/');
   console.log(location);
 
-  useEffect(() => {
-    const getMovie = async () => {
-      try {
-        setLoading(true);
-        const { data } = await axios.get(
-          `https://api.themoviedb.org/3/movie/${id}?api_key=f47740ae2875f781102cfee99d21c1c4`
-        );
-        setMovie(data);
-      } catch (error) {
-        console.log(error);
-      } finally {
-        setLoading(false);
-      }
-    };
+  const { data, loading } = useHTTP(getMainList, id);
 
-    getMovie();
-  }, [id]);
-  console.log(movie);
+  const { title, vote_average, overview, genres, poster_path } = data;
 
-  const { title, vote_average, overview, genres, poster_path } = movie;
   const imgNotFound = 'http://placekitten.com/g/200/300';
   return loading ? (
     <p>Loading</p>

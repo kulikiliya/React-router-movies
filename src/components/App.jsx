@@ -1,14 +1,11 @@
-import Homepage from 'pages/Homepage';
-// import Movies from 'pages/Movies';
-import NotFound from 'pages/NotFound';
+import Homepage from 'pages/Homepage/Homepage';
+import NotFound from 'pages/NotFound/NotFound';
 import { Routes, Route } from 'react-router-dom';
 import { Header } from './Header/Header';
-// import { Cast } from './Cast/Cast';
-// import { Reviews } from './Reviews/Reviews';
-import { Search } from 'pages/Search';
+import { Search } from 'pages/Search/Search';
 import { Suspense, lazy } from 'react';
 
-const Movies = lazy(() => import('pages/Movies'));
+const Movies = lazy(() => import('pages/Movies/Movies'));
 const Cast = lazy(() => import('./Cast/Cast'));
 const Reviews = lazy(() => import('./Reviews/Reviews'));
 

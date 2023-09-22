@@ -1,34 +1,15 @@
-import axios from 'axios';
-import { useEffect, useState } from 'react';
 import { useLocation, useSearchParams } from 'react-router-dom';
-import { Wrapper } from './movies.styled';
+import { Wrapper } from '../Movies/movies.styled';
 import { Button, Form, Input, LinkStyled } from './search,styled';
+import { useHTTP } from 'components/hooks/useHTTP';
+import { getByQuary } from 'components/service/api';
 
 export const Search = () => {
-  const [movies, setMovies] = useState([]);
   const [searchParams, setSearchParams] = useSearchParams('');
   const location = useLocation();
-  const quary = searchParams.get('movie');
+  const quary = searchParams.get('movie') || '';
+  const { data } = useHTTP(getByQuary, quary);
   console.log(searchParams);
-
-  useEffect(() => {
-    if (searchParams.size === 0) {
-      return;
-    }
-    const findMovie = async () => {
-      try {
-        const { data } = await axios.get(
-          `https://api.themoviedb.org/3/search/movie?query=${quary}&api_key=f47740ae2875f781102cfee99d21c1c4`
-        );
-        setMovies(data.results);
-        console.log(data);
-      } catch (error) {
-        console.log(error);
-      }
-    };
-    findMovie();
-  }, [quary]);
-
   const handleSubmit = e => {
     e.preventDefault();
     setSearchParams({ movie: e.currentTarget.elements.movie.value });
@@ -42,7 +23,7 @@ export const Search = () => {
         <Button>Search</Button>
       </Form>
       <ul>
-        {movies?.map(movie => {
+        {data?.map(movie => {
           return (
             <li key={movie.id}>
               <LinkStyled
