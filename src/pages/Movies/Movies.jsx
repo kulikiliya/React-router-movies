@@ -8,8 +8,8 @@ import {
   GenreList,
   AdditionalList,
 } from './movies.styled';
-import { useHTTP } from 'components/hooks/useHTTP';
-import { getMainList } from 'components/service/api';
+import { useHTTP } from 'hooks/useHTTP';
+import { getMainList } from 'service/api';
 
 const Movies = () => {
   const { id } = useParams();

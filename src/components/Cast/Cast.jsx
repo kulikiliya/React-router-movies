@@ -1,5 +1,5 @@
-import { useHTTP } from 'components/hooks/useHTTP';
-import { getCast } from 'components/service/api';
+import { useHTTP } from 'hooks/useHTTP';
+import { getCast } from 'service/api';
 import { useParams } from 'react-router-dom';
 
 const Cast = () => {

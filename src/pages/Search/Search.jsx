@@ -1,8 +1,8 @@
 import { useLocation, useSearchParams } from 'react-router-dom';
 import { Wrapper } from '../Movies/movies.styled';
 import { Button, Form, Input, LinkStyled } from './search,styled';
-import { useHTTP } from 'components/hooks/useHTTP';
-import { getByQuary } from 'components/service/api';
+import { useHTTP } from 'hooks/useHTTP';
+import { getByQuary } from 'service/api';
 
 export const Search = () => {
   const [searchParams, setSearchParams] = useSearchParams('');

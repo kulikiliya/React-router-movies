@@ -1,5 +1,5 @@
-import { useHTTP } from 'components/hooks/useHTTP';
-import { getReviews } from 'components/service/api';
+import { useHTTP } from 'hooks/useHTTP';
+import { getReviews } from 'service/api';
 import { useParams } from 'react-router-dom';
 
 const Reviews = () => {
